@@ -1,25 +1,5 @@
-# Sample .profile for SuSE Linux
-# rewritten by Christian Steinruecken <cstein@suse.de>
-#
-# This file is read each time a login shell is started.
-# All other interactive shells will only read .bashrc; this is particularly
-# important for language settings, see below.
 
 test -z "$PROFILEREAD" && . /etc/profile || true
-
-# Most applications support several languages for their output.
-# To make use of this feature, simply uncomment one of the lines below or
-# add your own one (see /usr/share/locale/locale.alias for more codes)
-# This overwrites the system default set in /etc/sysconfig/language
-# in the variable RC_LANG.
-#
-#export LANG=de_DE.UTF-8	# uncomment this line for German output
-#export LANG=fr_FR.UTF-8	# uncomment this line for French output
-#export LANG=es_ES.UTF-8	# uncomment this line for Spanish output
-
-
-# Some people don't like fortune. If you uncomment the following lines,
-# you will have a fortune each time you log in ;-)
 
 ### shell framework
 source $HOME/shf3/bin/shfrc
@@ -53,3 +33,9 @@ PATH=$PATH:$HOME/sxda
 source $HOME/shf3.vasp/bin/shfrc
 
 source $HOME/shf3/bin/omprc
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+source "$rvm_path/contrib/ps1_functions"
+PS1_PREFIX="SKYNET "
+ps1_set
