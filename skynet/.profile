@@ -37,5 +37,5 @@ source $HOME/shf3/bin/omprc
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 source "$rvm_path/contrib/ps1_functions"
-PS1_PREFIX="SKYNET "
+PS1_PREFIX="SKYNET (\$?)"
 ps1_set
