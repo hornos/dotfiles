@@ -34,3 +34,6 @@ function status() {
   sjstat -c
   sinfo
 }
+function myqstat() {
+  squeue|grep $USER
+}
