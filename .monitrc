@@ -3,12 +3,29 @@ set httpd port 2812 address localhost
 
 check process mysql with pidfile /usr/local/var/mysql/pid
    group db
-   start program = "/usr/local/bin/mysql_server start"
-   stop program = "/usr/local/bin/mysql_server stop"
+   start program = "/usr/local/bin/mysql.server start --bind-address=localhost"
+   stop program = "/usr/local/bin/mysql.server stop"
    if failed host 127.0.0.1 port 3306 protocol mysql then restart
    if 5 restarts within 5 cycles then timeout
    depends on mysql_bin
 
- check file mysql_bin with path /usr/local/bin/mysqld
+check file mysql_bin with path /usr/local/bin/mysqld
    if failed checksum then unmonitor
    if failed permission 755 then unmonitor
+
+
+
+check process gmond with pidfile /usr/local/var/ganglia/gmond.pid
+   group ganglia
+   start program = "/usr/local/bin/gmond.server start -p /usr/local/var/ganglia/gmond.pid"
+   stop program = "/usr/local/bin/gmond.server stop"
+   if failed host 127.0.0.1 port 8649 then restart
+   if 5 restarts within 5 cycles then timeout
+
+check process gmetad with pidfile /usr/local/var/ganglia/gmetad.pid
+   group ganglia
+   start program = "/usr/local/bin/gmetad.server start -p /usr/local/var/ganglia/gmetad.pid"
+   stop program = "/usr/local/bin/gmetad.server stop"
+   if failed host 127.0.0.1 port 8652 then restart
+   if 5 restarts within 5 cycles then timeout
+   depends on gmond
