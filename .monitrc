@@ -14,7 +14,6 @@ check file mysql_bin with path /usr/local/bin/mysqld
    if failed permission 755 then unmonitor
 
 
-
 check process gmond with pidfile /usr/local/var/ganglia/gmond.pid
    group ganglia
    start program = "/usr/local/bin/gmond.server start -p /usr/local/var/ganglia/gmond.pid"
@@ -29,3 +28,22 @@ check process gmetad with pidfile /usr/local/var/ganglia/gmetad.pid
    if failed host 127.0.0.1 port 8652 then restart
    if 5 restarts within 5 cycles then timeout
    depends on gmond
+
+
+check process apache with pidfile /usr/local/mappstack/apache2/logs/httpd.pid
+   group www
+   start program = "/usr/local/mappstack/ctlscript.sh start apache"
+   stop program = "/usr/local/mappstack/ctlscript.sh stop apache"
+   if failed host 127.0.0.1 port 8080 then restart
+   if 5 restarts within 5 cycles then timeout
+   depends on gmond
+
+
+check process rabbitmq with pidfile /usr/local/var/rabbitmq/rabbitmq.pid
+   group mq
+   start program = "/usr/local/bin/rabbitmq.server start"
+   stop program = "/usr/local/bin/rabbitmq.server stop"
+   if failed host 127.0.0.1 port 5672 then restart
+   if 5 restarts within 5 cycles then timeout
+
+
