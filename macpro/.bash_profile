@@ -29,5 +29,9 @@ module use ${HOME}/site/eszr/mod/webdev
 
 alias findit=mdfind
 
-source $HOME/shf3.coding.smashingmagazine.com/2012/10/29/powerful-command-line-tools-developers/bin/shfrc
-source $HOME/shf3.coding.smashingmagazine.com/2012/10/29/powerful-command-line-tools-developers/bin/alias
+# source $HOME/shf3.coding.smashingmagazine.com/2012/10/29/powerful-command-line-tools-developers/bin/shfrc
+# source $HOME/shf3.coding.smashingmagazine.com/2012/10/29/powerful-command-line-tools-developers/bin/alias
+
+function iplisten() {
+  netstat -p tcp -na | grep LISTEN
+}

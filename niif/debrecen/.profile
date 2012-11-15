@@ -37,3 +37,10 @@ function status() {
   qstat -g c
 }
 
+function myqstat() {
+  qstat
+}
+
+function allqstat() {
+  qstat -u "*"
+}
